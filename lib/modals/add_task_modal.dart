@@ -52,10 +52,9 @@ class _AddTaskModalState extends State<AddTaskModal> {
             ),
       );
       return;
-    } else {
-      _addTask();
-      Navigator.pop(context);
     }
+    _addTask();
+    Navigator.pop(context);
   }
 
   void _addTask() async {
