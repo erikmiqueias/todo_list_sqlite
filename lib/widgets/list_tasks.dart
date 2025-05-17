@@ -63,7 +63,10 @@ class _ListTasksState extends State<ListTasks> {
         onRefresh: _getUncompletedTasks,
         child:
             tasks.isEmpty
-                ? ListView(children: [_buildNoTasks()])
+                ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [_buildNoTasks()],
+                )
                 : ListView.builder(
                   itemCount: tasks.length,
                   itemBuilder: (ctx, index) {
