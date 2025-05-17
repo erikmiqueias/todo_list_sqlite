@@ -15,6 +15,7 @@ class _ListUncompletedTasksState extends State<ListUncompletedTasks> {
   Future<void> _getUncompletedTasks() async {
     final db = DatabaseService.instance;
     final result = await db.getUncompletedTasks();
+
     setState(() {
       tasks = result.toList();
       tasks.sort((a, b) => b['isFavorite'].compareTo(a['isFavorite']));
@@ -25,15 +26,6 @@ class _ListUncompletedTasksState extends State<ListUncompletedTasks> {
   void initState() {
     super.initState();
     _getUncompletedTasks();
-  }
-
-  Widget _buildNoTasks() {
-    return const Center(
-      child: Text(
-        'No tasks to do!',
-        style: TextStyle(color: Colors.grey, fontSize: 20),
-      ),
-    );
   }
 
   @override
@@ -47,6 +39,22 @@ class _ListUncompletedTasksState extends State<ListUncompletedTasks> {
     await db.deleteTask(id);
     await _getUncompletedTasks();
     showSnackBar();
+  }
+
+  Widget _buildNoTasks() {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.3,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'No tasks to do!',
+            style: TextStyle(color: Colors.grey, fontSize: 20),
+          ),
+        ],
+      ),
+    );
   }
 
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar() {
@@ -63,9 +71,14 @@ class _ListUncompletedTasksState extends State<ListUncompletedTasks> {
         onRefresh: _getUncompletedTasks,
         child:
             tasks.isEmpty
-                ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [_buildNoTasks()],
+                ? ListView(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [_buildNoTasks()],
+                    ),
+                  ],
                 )
                 : ListView.builder(
                   itemCount: tasks.length,

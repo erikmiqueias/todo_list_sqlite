@@ -29,10 +29,17 @@ class _ListCompletedTasksState extends State<ListCompletedTasks> {
   }
 
   Widget _buildNoTasks() {
-    return const Center(
-      child: Text(
-        'No tasks completed',
-        style: TextStyle(color: Colors.grey, fontSize: 20),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.3,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'No tasks completed',
+            style: TextStyle(color: Colors.grey, fontSize: 20),
+          ),
+        ],
       ),
     );
   }
@@ -51,10 +58,7 @@ class _ListCompletedTasksState extends State<ListCompletedTasks> {
         onRefresh: _getCompletedTasks,
         child:
             completedTasks.isEmpty
-                ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [_buildNoTasks()],
-                )
+                ? ListView(children: [_buildNoTasks()])
                 : ListView.builder(
                   itemCount: completedTasks.length,
                   itemBuilder: (ctx, index) {

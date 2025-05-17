@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TodosDateTitle extends StatelessWidget {
-  const TodosDateTitle({super.key, required this.todoDateTitle, this.date});
+class TodoTitle extends StatelessWidget {
+  const TodoTitle({super.key, required this.todoDateTitle, this.date});
   final String todoDateTitle;
   final String? date;
 
