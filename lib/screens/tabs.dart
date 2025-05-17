@@ -12,25 +12,17 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  Widget _activePage = TodosScreen(title: const TodoTitle());
-  var _selectedPageIndex = 0;
+  int _activePageIndex = 0;
 
-  void _setActivePage(Widget page) {
-    setState(() {
-      _activePage = page;
-    });
-  }
+  final List<Widget> _pages = [
+    TodosScreen(title: const TodoTitle()),
+    CalendarScreen(),
+  ];
 
   void _selectPage(int index) {
     setState(() {
-      _selectedPageIndex = index;
+      _activePageIndex = index;
     });
-
-    if (index == 0) {
-      _setActivePage(TodosScreen(title: const TodoTitle()));
-    } else {
-      _setActivePage(CalendarScreen());
-    }
   }
 
   void _openAddTaskModal() {
@@ -43,21 +35,21 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _activePage,
+      body: IndexedStack(index: _activePageIndex, children: _pages),
       floatingActionButton: FloatingActionButton(
         onPressed: _openAddTaskModal,
         backgroundColor:
             Theme.of(
               context,
             ).colorScheme.copyWith(surface: Colors.indigo.shade600).surface,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        currentIndex: _selectedPageIndex,
         onTap: _selectPage,
-        items: [
+        currentIndex: _activePageIndex,
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Todos'),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
