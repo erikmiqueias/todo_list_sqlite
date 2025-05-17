@@ -36,7 +36,7 @@ class _ListCompletedTasksState extends State<ListCompletedTasks> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'No tasks completed',
+            'No tasks completed!',
             style: TextStyle(color: Colors.grey, fontSize: 20),
           ),
         ],
