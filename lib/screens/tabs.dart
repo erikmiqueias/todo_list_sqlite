@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list_sqlite/modals/add_task_modal.dart';
+import 'package:todo_list_sqlite/screens/add_task_modal.dart';
 import 'package:todo_list_sqlite/screens/calendar.dart';
 import 'package:todo_list_sqlite/screens/todos.dart';
 import 'package:todo_list_sqlite/widgets/todo_title.dart';
