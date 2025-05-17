@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list_sqlite/services/database_service.dart';
+import 'package:todo_list_sqlite/widgets/modal_button.dart';
 
 class AddTaskModal extends StatefulWidget {
   const AddTaskModal({super.key});
@@ -84,7 +85,7 @@ class _AddTaskModalState extends State<AddTaskModal> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
         child: Column(
           children: [
             TextField(
@@ -130,14 +131,19 @@ class _AddTaskModalState extends State<AddTaskModal> {
                 ),
               ],
             ),
+            SizedBox(height: 20),
             Row(
+              spacing: 10,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                ModalButton(
+                  onPress: () => Navigator.pop(context),
                   child: Text('Cancel'),
-                  onPressed: () => Navigator.of(context).pop(),
                 ),
-                TextButton(child: Text('Save'), onPressed: () => _submitForm()),
+                ModalButton(
+                  onPress: () => _submitForm(),
+                  child: Text('Cancel'),
+                ),
               ],
             ),
           ],
