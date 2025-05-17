@@ -8,6 +8,17 @@ class ModalButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(onPressed: onPress, child: child);
+    return ElevatedButton(
+      onPressed: onPress,
+      style: ElevatedButton.styleFrom(
+        elevation: 3,
+        backgroundColor:
+            Theme.of(context).colorScheme
+                .copyWith(surface: const Color.fromARGB(255, 47, 60, 136))
+                .surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+      child: child,
+    );
   }
 }

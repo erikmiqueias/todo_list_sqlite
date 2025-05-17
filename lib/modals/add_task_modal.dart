@@ -140,10 +140,7 @@ class _AddTaskModalState extends State<AddTaskModal> {
                   onPress: () => Navigator.pop(context),
                   child: Text('Cancel'),
                 ),
-                ModalButton(
-                  onPress: () => _submitForm(),
-                  child: Text('Cancel'),
-                ),
+                ModalButton(onPress: () => _submitForm(), child: Text('Save')),
               ],
             ),
           ],

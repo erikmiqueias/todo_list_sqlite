@@ -15,6 +15,12 @@ void main() {
           backgroundColor: AppColors.backgroundPrimary,
           foregroundColor: Colors.white,
         ),
+        fontFamily: 'Poppins',
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            textStyle: TextStyle(fontFamily: 'Poppins'),
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const LoginScreen(),
