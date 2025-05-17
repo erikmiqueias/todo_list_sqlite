@@ -19,8 +19,9 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(35),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(height: 20),
                 Row(
@@ -46,20 +47,11 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 LoginButton(
-                  pathIcon: 'assets/google_icon.svg',
-                  label: 'Continue with Google',
                   onChangeScreen: () {
                     _goToMainScreen(context);
                   },
                 ),
-                const SizedBox(height: 10),
-                LoginButton(
-                  pathIcon: 'assets/facebook_icon.svg',
-                  label: 'Continue with Facebook',
-                  onChangeScreen: () {
-                    _goToMainScreen(context);
-                  },
-                ),
+
                 const SizedBox(height: 24),
 
                 Text(
