@@ -101,7 +101,7 @@ class _TodoState extends State<Todo> {
                     onChanged: (value) {
                       _setIsChecked(value);
                     },
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                   ),
                 ),
                 Column(

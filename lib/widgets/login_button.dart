@@ -17,7 +17,7 @@ class LoginButton extends StatelessWidget {
     return ElevatedButton.icon(
       onPressed: onChangeScreen,
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(350, 45),
+        fixedSize: const Size(350, 45),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         elevation: 2, // agora funciona

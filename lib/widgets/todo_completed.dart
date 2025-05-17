@@ -95,7 +95,7 @@ class _TodoCompletedState extends State<TodoCompleted> {
                       onChanged: (value) {
                         _setIsChecked(value);
                       },
-                      shape: CircleBorder(),
+                      shape: const CircleBorder(),
                     ),
                   ),
                 ],

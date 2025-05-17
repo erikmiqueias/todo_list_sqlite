@@ -17,11 +17,10 @@ class _TodosScreenState extends State<TodosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleTextStyle: TextStyle(),
         actionsPadding: const EdgeInsets.symmetric(horizontal: 20),
         actions: [
           widget.title,
-          Spacer(),
+          const Spacer(),
           SvgPicture.asset('assets/avatar.svg', height: 35, width: 35),
         ],
       ),
@@ -30,10 +29,10 @@ class _TodosScreenState extends State<TodosScreen> {
         child: Column(
           spacing: 18,
           children: [
-            TodosDateTitle(todoDateTitle: 'Today', date: '07-08-2025'),
-            ListTasks(),
-            TodosDateTitle(todoDateTitle: 'Completed Today'),
-            ListCompletedTasks(),
+            const TodosDateTitle(todoDateTitle: 'Today', date: '07-08-2025'),
+            const ListTasks(),
+            const TodosDateTitle(todoDateTitle: 'Completed Today'),
+            const ListCompletedTasks(),
           ],
         ),
       ),
