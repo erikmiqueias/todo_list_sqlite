@@ -14,18 +14,47 @@ class _AddTaskModalState extends State<AddTaskModal> {
   final _descriptionController = TextEditingController();
   void _presentDatePicker() async {
     final now = DateTime.now();
-    final firstDate = DateTime(now.year - 1, now.month, now.day);
+    final firstDate = DateTime(now.year, now.month, now.day);
 
     final pickedDate = await showDatePicker(
       context: context,
       firstDate: firstDate,
-      lastDate: now,
+      lastDate: DateTime.now().add(const Duration(days: 365)),
       initialDate: now,
     );
 
     setState(() {
       _selectedDate = pickedDate;
     });
+  }
+
+  void _submitForm() {
+    if (_titleController.text.isEmpty ||
+        _descriptionController.text.isEmpty ||
+        _selectedDate == null) {
+      showDialog(
+        context: context,
+        builder:
+            (ctx) => AlertDialog(
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              title: const Text('Invalid input!'),
+              content: const Text(
+                'Please provide valid title, description and date.',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+      );
+      return;
+    }
+    _addTask();
+    Navigator.pop(context);
   }
 
   void _addTask() async {
@@ -60,14 +89,14 @@ class _AddTaskModalState extends State<AddTaskModal> {
           children: [
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Title Task',
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
               ),
             ),
             TextField(
               controller: _descriptionController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Description Task',
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
               ),
@@ -108,13 +137,7 @@ class _AddTaskModalState extends State<AddTaskModal> {
                   child: Text('Cancel'),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
-                TextButton(
-                  child: Text('Save'),
-                  onPressed: () {
-                    _addTask();
-                    Navigator.of(context).pop();
-                  },
-                ),
+                TextButton(child: Text('Save'), onPressed: () => _submitForm()),
               ],
             ),
           ],
