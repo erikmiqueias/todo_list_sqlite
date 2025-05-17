@@ -52,7 +52,7 @@ class _TabsScreenState extends State<TabsScreen> {
         onTap: _selectPage,
         currentIndex: _activePageIndex,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Todos'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Tasks'),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
             label: 'Calendar',
