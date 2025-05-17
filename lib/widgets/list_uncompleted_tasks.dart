@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:todo_list_sqlite/services/database_service.dart';
 import 'package:todo_list_sqlite/widgets/todo.dart';
 
-class ListTasks extends StatefulWidget {
-  const ListTasks({super.key});
+class ListUncompletedTasks extends StatefulWidget {
+  const ListUncompletedTasks({super.key});
 
   @override
-  State<ListTasks> createState() => _ListTasksState();
+  State<ListUncompletedTasks> createState() => _ListUncompletedTasksState();
 }
 
-class _ListTasksState extends State<ListTasks> {
+class _ListUncompletedTasksState extends State<ListUncompletedTasks> {
   List<Map<String, dynamic>> tasks = [];
 
   Future<void> _getUncompletedTasks() async {

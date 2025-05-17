@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_list_sqlite/widgets/list_completed_tasks.dart';
-import 'package:todo_list_sqlite/widgets/list_tasks.dart';
+import 'package:todo_list_sqlite/widgets/list_uncompleted_tasks.dart';
 import 'package:todo_list_sqlite/widgets/todos_date_title.dart';
 
 class TodosScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _TodosScreenState extends State<TodosScreen> {
           spacing: 18,
           children: [
             const TodosDateTitle(todoDateTitle: 'Today', date: '07-08-2025'),
-            const ListTasks(),
+            const ListUncompletedTasks(),
             const TodosDateTitle(todoDateTitle: 'Completed Today'),
             const ListCompletedTasks(),
           ],

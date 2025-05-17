@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list_sqlite/services/database_service.dart';
-import 'package:todo_list_sqlite/widgets/todo_completed.dart';
+import 'package:todo_list_sqlite/widgets/task_completed.dart';
 
 class ListCompletedTasks extends StatefulWidget {
   const ListCompletedTasks({super.key, this.onRefresh});
@@ -62,7 +62,7 @@ class _ListCompletedTasksState extends State<ListCompletedTasks> {
                         ? _buildNoTasks()
                         : Column(
                           children: [
-                            TodoCompleted(
+                            TaskCompleted(
                               onRefresh: _getCompletedTasks,
                               date: completedTasks[index]['date'],
                               title: completedTasks[index]['title'],

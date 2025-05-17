@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list_sqlite/services/database_service.dart';
 
-class TodoCompleted extends StatefulWidget {
-  const TodoCompleted({
+class TaskCompleted extends StatefulWidget {
+  const TaskCompleted({
     super.key,
     required this.date,
     required this.title,
@@ -18,10 +18,10 @@ class TodoCompleted extends StatefulWidget {
   final Future<void> Function() onRefresh;
 
   @override
-  State<TodoCompleted> createState() => _TodoCompletedState();
+  State<TaskCompleted> createState() => _TaskCompletedState();
 }
 
-class _TodoCompletedState extends State<TodoCompleted> {
+class _TaskCompletedState extends State<TaskCompleted> {
   bool? _isChecked;
 
   void _setIsChecked(bool? value) async {
