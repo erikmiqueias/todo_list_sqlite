@@ -39,6 +39,7 @@ class _ListUncompletedTasksState extends State<ListUncompletedTasks> {
     await db.deleteTask(id);
     await _getUncompletedTasks();
     showSnackBar();
+    db.closeDatabase();
   }
 
   Widget _buildNoTasks() {

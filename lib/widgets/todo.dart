@@ -57,14 +57,12 @@ class _TodoState extends State<Todo> {
     if (value!) {
       await db.updateFavorite(widget.id, 1);
       await widget.onRefresh?.call();
-      setState(() {
-        _isFavorite = value;
-      });
-      await widget.onRefresh?.call();
+
       setState(() {
         _isFavorite = value;
       });
 
+      db.closeDatabase();
       return;
     }
 
@@ -73,6 +71,7 @@ class _TodoState extends State<Todo> {
     setState(() {
       _isFavorite = value;
     });
+    db.closeDatabase();
   }
 
   @override

@@ -41,6 +41,7 @@ class _TaskCompletedState extends State<TaskCompleted> {
     setState(() {
       _isChecked = value;
     });
+    db.closeDatabase();
   }
 
   @override

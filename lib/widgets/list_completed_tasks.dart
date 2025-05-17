@@ -24,6 +24,7 @@ class _ListCompletedTasksState extends State<ListCompletedTasks> {
     final result = await db.getCompletedTasks();
     setState(() {
       completedTasks = result.toList();
+      db.closeDatabase();
       return;
     });
   }
