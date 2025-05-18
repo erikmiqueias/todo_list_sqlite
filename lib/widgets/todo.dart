@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_sqlite/screens/task_details.dart';
 import 'package:todo_list_sqlite/services/database_service.dart';
 
 class Todo extends StatefulWidget {
@@ -74,67 +75,89 @@ class _TodoState extends State<Todo> {
     db.closeDatabase();
   }
 
+  void _changeToTaskDetailsScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (ctx) => TaskDetailsScreen(
+              title: widget.title,
+              description: widget.description,
+              date: widget.date.toString(),
+              isCompleted: widget.isChecked,
+            ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: const [
-          BoxShadow(color: Colors.black26, offset: Offset(0, 3), blurRadius: 4),
-        ],
-      ),
-      width: 330,
-      height: 60,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Transform.scale(
-                  scale: 1.3,
-                  child: Checkbox(
-                    value: _isChecked ?? widget.isChecked == 1,
-                    onChanged: (value) {
-                      _setIsChecked(value);
-                    },
-                    shape: const CircleBorder(),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      widget.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Text(
-                      widget.date,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.yellow.shade700,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            InkWell(
-              child: Icon(
-                widget.isFavorite == 1 ? Icons.star : Icons.star_border,
-                size: 23,
-              ),
-              onTap: () {
-                _setIsFavorite(!(_isFavorite ?? widget.isFavorite == 1));
-              },
+    return InkWell(
+      onTap: _changeToTaskDetailsScreen,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primaryContainer,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0, 3),
+              blurRadius: 4,
             ),
           ],
+        ),
+        width: 330,
+        height: 60,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Transform.scale(
+                    scale: 1.3,
+                    child: Checkbox(
+                      value: _isChecked ?? widget.isChecked == 1,
+                      onChanged: (value) {
+                        _setIsChecked(value);
+                      },
+                      shape: const CircleBorder(),
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        widget.date,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.yellow.shade700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              InkWell(
+                child: Icon(
+                  widget.isFavorite == 1 ? Icons.star : Icons.star_border,
+                  size: 23,
+                ),
+                onTap: () {
+                  _setIsFavorite(!(_isFavorite ?? widget.isFavorite == 1));
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

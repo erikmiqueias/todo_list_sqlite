@@ -71,6 +71,7 @@ class _ListCompletedTasksState extends State<ListCompletedTasks> {
                               onRefresh: _getCompletedTasks,
                               date: completedTasks[index]['date'],
                               title: completedTasks[index]['title'],
+                              description: completedTasks[index]['description'],
                               isChecked: completedTasks[index]['isCompleted'],
                               id: completedTasks[index]['id'],
                             ),
