@@ -30,7 +30,7 @@ class _TabsScreenState extends State<TabsScreen> {
       isScrollControlled: false,
       scrollControlDisabledMaxHeightRatio: 1.0,
       context: context,
-      builder: (ctx) => const AddTaskModal(),
+      builder: (ctx) => const AddTaskModalScreen(),
     );
   }
 

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:todo_list_sqlite/services/database_service.dart';
 import 'package:todo_list_sqlite/widgets/modal_button.dart';
 
-class AddTaskModal extends StatefulWidget {
-  const AddTaskModal({super.key});
+class AddTaskModalScreen extends StatefulWidget {
+  const AddTaskModalScreen({super.key});
 
   @override
-  State<AddTaskModal> createState() => _AddTaskModalState();
+  State<AddTaskModalScreen> createState() => _AddTaskModalScreenState();
 }
 
-class _AddTaskModalState extends State<AddTaskModal> {
+class _AddTaskModalScreenState extends State<AddTaskModalScreen> {
   DateTime? _selectedDate;
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
