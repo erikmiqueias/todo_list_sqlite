@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_list_sqlite/screens/task_details.dart';
 import 'package:todo_list_sqlite/services/database_service.dart';
 
-class Todo extends StatefulWidget {
-  const Todo({
+class TodoWidget extends StatefulWidget {
+  const TodoWidget({
     super.key,
     required this.title,
     required this.date,
@@ -22,10 +22,10 @@ class Todo extends StatefulWidget {
   final Future<void> Function()? onRefresh;
 
   @override
-  State<Todo> createState() => _TodoState();
+  State<TodoWidget> createState() => _TodoState();
 }
 
-class _TodoState extends State<Todo> {
+class _TodoState extends State<TodoWidget> {
   bool? _isChecked;
   bool? _isFavorite;
 

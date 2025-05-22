@@ -51,9 +51,7 @@ class LoginScreen extends StatelessWidget {
                     _goToMainScreen(context);
                   },
                 ),
-
                 const SizedBox(height: 24),
-
                 Text(
                   'Continue with more options',
                   style: TextStyle(

@@ -1,45 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list_sqlite/services/database_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list_sqlite/widgets/todo.dart';
 
-class ListUncompletedTasks extends StatefulWidget {
+import 'package:todo_list_sqlite/providers/get_task_completed_provider.dart';
+import 'package:todo_list_sqlite/providers/get_task_uncompleted_provider.dart';
+
+class ListUncompletedTasks extends ConsumerStatefulWidget {
   const ListUncompletedTasks({super.key});
 
   @override
-  State<ListUncompletedTasks> createState() => _ListUncompletedTasksState();
+  ConsumerState<ListUncompletedTasks> createState() =>
+      _ListUncompletedTasksState();
 }
 
-class _ListUncompletedTasksState extends State<ListUncompletedTasks> {
-  List<Map<String, dynamic>> tasks = [];
-
+class _ListUncompletedTasksState extends ConsumerState<ListUncompletedTasks> {
   Future<void> _getUncompletedTasks() async {
-    final db = DatabaseService.instance;
-    final result = await db.getUncompletedTasks();
-
-    setState(() {
-      tasks = result.toList();
-      tasks.sort((a, b) => b['isFavorite'].compareTo(a['isFavorite']));
-    });
+    await ref.read(taskUncompletedProvider.notifier).getUncompletedTasks();
+    await ref.read(taskCompletedProvider.notifier).getCompletedTasks();
   }
 
   @override
   void initState() {
     super.initState();
     _getUncompletedTasks();
-  }
-
-  @override
-  void dispose() {
-    tasks.clear();
-    super.dispose();
-  }
-
-  void deleteTask(int id) async {
-    final db = DatabaseService.instance;
-    await db.deleteTask(id);
-    await _getUncompletedTasks();
-    showSnackBar();
-    db.closeDatabase();
   }
 
   Widget _buildNoTasks() {
@@ -66,6 +49,7 @@ class _ListUncompletedTasksState extends State<ListUncompletedTasks> {
 
   @override
   Widget build(BuildContext context) {
+    final tasks = ref.watch(taskUncompletedProvider);
     return SizedBox(
       height: 250,
       child: RefreshIndicator(
@@ -88,10 +72,10 @@ class _ListUncompletedTasksState extends State<ListUncompletedTasks> {
                       children: [
                         Dismissible(
                           onDismissed: (direction) {
-                            deleteTask(tasks[index]['id']);
+                            // deleteTask(tasks[index]['id']);
                           },
                           key: ValueKey(tasks[index]['id']),
-                          child: Todo(
+                          child: TodoWidget(
                             id: tasks[index]['id'],
                             title: tasks[index]['title'],
                             date: tasks[index]['date'],

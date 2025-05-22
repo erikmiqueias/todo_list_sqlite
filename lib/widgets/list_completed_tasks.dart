@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list_sqlite/services/database_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_list_sqlite/providers/get_task_completed_provider.dart';
+import 'package:todo_list_sqlite/providers/get_task_uncompleted_provider.dart';
 import 'package:todo_list_sqlite/widgets/task_completed.dart';
 
-class ListCompletedTasks extends StatefulWidget {
+class ListCompletedTasks extends ConsumerStatefulWidget {
   const ListCompletedTasks({super.key, this.onRefresh});
   final Future<void> Function()? onRefresh;
 
   @override
-  State<ListCompletedTasks> createState() => _ListCompletedTasksState();
+  ConsumerState<ListCompletedTasks> createState() => _ListCompletedTasksState();
 }
 
-class _ListCompletedTasksState extends State<ListCompletedTasks> {
-  List<Map<String, dynamic>> completedTasks = [];
-
+class _ListCompletedTasksState extends ConsumerState<ListCompletedTasks> {
   @override
   void initState() {
     super.initState();
@@ -20,13 +20,8 @@ class _ListCompletedTasksState extends State<ListCompletedTasks> {
   }
 
   Future<void> _getCompletedTasks() async {
-    final db = DatabaseService.instance;
-    final result = await db.getCompletedTasks();
-    setState(() {
-      completedTasks = result.toList();
-      db.closeDatabase();
-      return;
-    });
+    await ref.read(taskCompletedProvider.notifier).getCompletedTasks();
+    await ref.read(taskUncompletedProvider.notifier).getUncompletedTasks();
   }
 
   Widget _buildNoTasks() {
@@ -46,13 +41,8 @@ class _ListCompletedTasksState extends State<ListCompletedTasks> {
   }
 
   @override
-  void dispose() {
-    completedTasks.clear();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final completedTasks = ref.watch(taskCompletedProvider);
     return SizedBox(
       height: 250,
       child: RefreshIndicator(
