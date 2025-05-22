@@ -77,20 +77,37 @@ class _ListUncompletedTasksState extends ConsumerState<ListUncompletedTasks> {
                   itemBuilder: (ctx, index) {
                     return Column(
                       children: [
-                        Dismissible(
-                          onDismissed: (direction) {
-                            deleteTask(tasks[index]['id']);
-                          },
-                          key: ValueKey(tasks[index]['id']),
-                          child: TodoWidget(
-                            id: tasks[index]['id'],
-                            title: tasks[index]['title'],
-                            date: tasks[index]['date'],
-                            description: tasks[index]['description'],
-                            isChecked: tasks[index]['isCompleted'],
-                            isFavorite: tasks[index]['isFavorite'],
-                            onRefresh: _getUncompletedTasks,
-                          ),
+                        Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                alignment: Alignment.centerLeft,
+                                padding: const EdgeInsets.only(left: 10),
+                                child: const Icon(Icons.delete, size: 30),
+                              ),
+                            ),
+                            Dismissible(
+                              key: ValueKey(tasks[index]['id']),
+                              background: Icon(Icons.delete, size: 30),
+                              direction: DismissDirection.startToEnd,
+                              onDismissed: (direction) {
+                                deleteTask(tasks[index]['id']);
+                              },
+                              child: TodoWidget(
+                                id: tasks[index]['id'],
+                                title: tasks[index]['title'],
+                                date: tasks[index]['date'],
+                                description: tasks[index]['description'],
+                                isChecked: tasks[index]['isCompleted'],
+                                isFavorite: tasks[index]['isFavorite'],
+                                onRefresh: _getUncompletedTasks,
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 7),
                       ],
