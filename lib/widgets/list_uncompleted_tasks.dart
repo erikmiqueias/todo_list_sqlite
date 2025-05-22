@@ -92,7 +92,6 @@ class _ListUncompletedTasksState extends ConsumerState<ListUncompletedTasks> {
                             ),
                             Dismissible(
                               key: ValueKey(tasks[index]['id']),
-                              background: Icon(Icons.delete, size: 30),
                               direction: DismissDirection.startToEnd,
                               onDismissed: (direction) {
                                 deleteTask(tasks[index]['id']);
