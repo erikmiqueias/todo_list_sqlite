@@ -9,7 +9,7 @@ class TaskUncompletedProvider
   Future<void> getUncompletedTasks() async {
     final db = DatabaseService.instance;
     final result = await db.getUncompletedTasks();
-    state = result.toList();
+    state = [...result];
     db.closeDatabase();
   }
 }

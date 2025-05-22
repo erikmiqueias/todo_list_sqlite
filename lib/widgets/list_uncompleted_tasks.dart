@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_list_sqlite/providers/delete_task_provider.dart';
 import 'package:todo_list_sqlite/widgets/todo.dart';
 
 import 'package:todo_list_sqlite/providers/get_task_completed_provider.dart';
@@ -17,6 +18,12 @@ class _ListUncompletedTasksState extends ConsumerState<ListUncompletedTasks> {
   Future<void> _getUncompletedTasks() async {
     await ref.read(taskUncompletedProvider.notifier).getUncompletedTasks();
     await ref.read(taskCompletedProvider.notifier).getCompletedTasks();
+  }
+
+  Future<void> deleteTask(int id) async {
+    await ref.read(deleteTaskProvider.notifier).delteTask(id);
+    await _getUncompletedTasks();
+    showSnackBar();
   }
 
   @override
@@ -72,7 +79,7 @@ class _ListUncompletedTasksState extends ConsumerState<ListUncompletedTasks> {
                       children: [
                         Dismissible(
                           onDismissed: (direction) {
-                            // deleteTask(tasks[index]['id']);
+                            deleteTask(tasks[index]['id']);
                           },
                           key: ValueKey(tasks[index]['id']),
                           child: TodoWidget(

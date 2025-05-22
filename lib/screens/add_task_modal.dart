@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list_sqlite/services/database_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_list_sqlite/models/todo.dart';
+import 'package:todo_list_sqlite/providers/create_task_provider.dart';
+import 'package:todo_list_sqlite/providers/get_task_completed_provider.dart';
+import 'package:todo_list_sqlite/providers/get_task_uncompleted_provider.dart';
 import 'package:todo_list_sqlite/widgets/modal_button.dart';
 
-class AddTaskModalScreen extends StatefulWidget {
+class AddTaskModalScreen extends ConsumerStatefulWidget {
   const AddTaskModalScreen({super.key});
 
   @override
-  State<AddTaskModalScreen> createState() => _AddTaskModalScreenState();
+  ConsumerState<AddTaskModalScreen> createState() => _AddTaskModalScreenState();
 }
 
-class _AddTaskModalScreenState extends State<AddTaskModalScreen> {
+class _AddTaskModalScreenState extends ConsumerState<AddTaskModalScreen> {
   DateTime? _selectedDate;
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+
   void _presentDatePicker() async {
     final now = DateTime.now();
     final firstDate = DateTime(now.year, now.month, now.day);
@@ -59,12 +64,21 @@ class _AddTaskModalScreenState extends State<AddTaskModalScreen> {
   }
 
   void _addTask() async {
-    final db = DatabaseService.instance;
-    await db.createTask(
-      _titleController.text,
-      _descriptionController.text,
-      _selectedDate.toString().substring(0, 10),
-    );
+    await ref
+        .read(createTaskProvider.notifier)
+        .createTask(
+          Todo(
+            title: _titleController.text,
+            description: _descriptionController.text,
+            todoDate: _selectedDate.toString(),
+            isChecked: 0,
+            isFavorite: 0,
+          ),
+          ref,
+        );
+
+    await ref.read(taskUncompletedProvider.notifier).getUncompletedTasks();
+    await ref.read(taskCompletedProvider.notifier).getCompletedTasks();
   }
 
   @override
