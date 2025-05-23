@@ -45,32 +45,29 @@ class _ListCompletedTasksState extends ConsumerState<ListCompletedTasks> {
     final completedTasks = ref.watch(taskCompletedProvider);
     return SizedBox(
       height: 250,
-      child: RefreshIndicator(
-        onRefresh: _getCompletedTasks,
-        child:
-            completedTasks.isEmpty
-                ? ListView(children: [_buildNoTasks()])
-                : ListView.builder(
-                  itemCount: completedTasks.length,
-                  itemBuilder: (ctx, index) {
-                    return completedTasks.isEmpty
-                        ? _buildNoTasks()
-                        : Column(
-                          children: [
-                            TaskCompleted(
-                              onRefresh: _getCompletedTasks,
-                              date: completedTasks[index]['date'],
-                              title: completedTasks[index]['title'],
-                              description: completedTasks[index]['description'],
-                              isChecked: completedTasks[index]['isCompleted'],
-                              id: completedTasks[index]['id'],
-                            ),
-                            const SizedBox(height: 7),
-                          ],
-                        );
-                  },
-                ),
-      ),
+      child:
+          completedTasks.isEmpty
+              ? _buildNoTasks()
+              : ListView.builder(
+                itemCount: completedTasks.length,
+                itemBuilder: (ctx, index) {
+                  return completedTasks.isEmpty
+                      ? _buildNoTasks()
+                      : Column(
+                        children: [
+                          TaskCompleted(
+                            onRefresh: _getCompletedTasks,
+                            date: completedTasks[index]['date'],
+                            title: completedTasks[index]['title'],
+                            description: completedTasks[index]['description'],
+                            isChecked: completedTasks[index]['isCompleted'],
+                            id: completedTasks[index]['id'],
+                          ),
+                          const SizedBox(height: 7),
+                        ],
+                      );
+                },
+              ),
     );
   }
 }
