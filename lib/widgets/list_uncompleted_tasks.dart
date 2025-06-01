@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list_sqlite/providers/delete_task_provider.dart';
+import 'package:todo_list_sqlite/providers/get_task_completed_provider.dart';
 import 'package:todo_list_sqlite/providers/get_task_uncompleted_provider.dart';
 import 'package:todo_list_sqlite/widgets/todo.dart';
 
@@ -9,6 +10,11 @@ class ListUncompletedTasks extends ConsumerWidget {
 
   Future<void> deleteTask(BuildContext context, WidgetRef ref, int id) async {
     await ref.read(deleteTaskProvider.notifier).deleteTask(id);
+  }
+
+  Future<void> _refreshTasks(WidgetRef ref) async {
+    await ref.read(taskUncompletedProvider.notifier).getUncompletedTasks();
+    await ref.read(taskCompletedProvider.notifier).getCompletedTasks();
   }
 
   void showSnackBar(BuildContext context) {
@@ -66,6 +72,7 @@ class ListUncompletedTasks extends ConsumerWidget {
                               description: task['description'],
                               isChecked: task['isCompleted'],
                               isFavorite: task['isFavorite'],
+                              onRefresh: () => _refreshTasks(ref),
                             ),
                           ),
                         ],

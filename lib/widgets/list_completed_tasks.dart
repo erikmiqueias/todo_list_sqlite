@@ -19,7 +19,10 @@ class _ListCompletedTasksState extends ConsumerState<ListCompletedTasks> {
     _getCompletedTasks();
   }
 
-  Future<void> _getCompletedTasks() async {}
+  Future<void> _getCompletedTasks() async {
+    await ref.read(taskCompletedProvider.notifier).getCompletedTasks();
+    await ref.read(taskUncompletedProvider.notifier).getUncompletedTasks();
+  }
 
   Widget _buildNoTasks() {
     return SizedBox(
@@ -48,21 +51,20 @@ class _ListCompletedTasksState extends ConsumerState<ListCompletedTasks> {
               : ListView.builder(
                 itemCount: completedTasks.length,
                 itemBuilder: (ctx, index) {
-                  return completedTasks.isEmpty
-                      ? _buildNoTasks()
-                      : Column(
-                        children: [
-                          TaskCompleted(
-                            onRefresh: _getCompletedTasks,
-                            date: completedTasks[index]['date'],
-                            title: completedTasks[index]['title'],
-                            description: completedTasks[index]['description'],
-                            isChecked: completedTasks[index]['isCompleted'],
-                            id: completedTasks[index]['id'],
-                          ),
-                          const SizedBox(height: 7),
-                        ],
-                      );
+                  final task = completedTasks[index];
+                  return Column(
+                    children: [
+                      TaskCompleted(
+                        onRefresh: _getCompletedTasks,
+                        date: task['date'],
+                        title: task['title'],
+                        description: task['description'],
+                        isChecked: task['isCompleted'],
+                        id: task['id'],
+                      ),
+                      const SizedBox(height: 7),
+                    ],
+                  );
                 },
               ),
     );

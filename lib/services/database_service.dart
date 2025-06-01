@@ -74,12 +74,13 @@ class DatabaseService {
     return result;
   }
 
-  Future getCompletedTasks() async {
+  Future getCompletedTasks(String date) async {
     final db = await database;
     final result = await db.query(
       _tasksTableName,
-      where: '$_tasksIsCompletedColumnName = ?',
-      whereArgs: [1],
+      where:
+          '$_tasksIsCompletedColumnName = ? AND LOWER($_tasksDateColumnName) LIKE LOWER(?)',
+      whereArgs: [1, '%${formatDate(date)}%'],
     );
     return result;
   }

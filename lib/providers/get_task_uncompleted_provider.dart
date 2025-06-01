@@ -9,7 +9,7 @@ class TaskUncompletedProvider
       getUncompletedTasks();
     });
 
-    getUncompletedTasks(); // Busca inicial
+    getUncompletedTasks();
   }
   final Ref ref;
 
