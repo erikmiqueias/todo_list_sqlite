@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_sqlite/helpers/date_format.dart';
 import 'package:todo_list_sqlite/screens/task_details.dart';
 import 'package:todo_list_sqlite/services/database_service.dart';
 
@@ -99,7 +100,7 @@ class _TaskCompletedState extends State<TaskCompleted> {
                         ),
                       ),
                       Text(
-                        widget.date,
+                        formatDate(widget.date),
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.yellow.shade700,

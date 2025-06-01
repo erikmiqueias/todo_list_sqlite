@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_list_sqlite/helpers/date_format.dart';
+import 'package:todo_list_sqlite/providers/date_provider.dart';
 import 'package:todo_list_sqlite/widgets/list_completed_tasks.dart';
 import 'package:todo_list_sqlite/widgets/list_uncompleted_tasks.dart';
 import 'package:todo_list_sqlite/widgets/title.dart';
 
-class TodosScreen extends StatefulWidget {
+class TodosScreen extends ConsumerStatefulWidget {
   const TodosScreen({super.key, required this.title});
   final Widget title;
 
   @override
-  State<TodosScreen> createState() => _TodosScreenState();
+  ConsumerState<TodosScreen> createState() => _TodosScreenState();
 }
 
-class _TodosScreenState extends State<TodosScreen> {
+class _TodosScreenState extends ConsumerState<TodosScreen> {
   @override
   Widget build(BuildContext context) {
+    final date = ref.watch(dateProvider);
+
     return Scaffold(
       appBar: AppBar(
         actionsPadding: const EdgeInsets.symmetric(horizontal: 20),
@@ -30,7 +35,7 @@ class _TodosScreenState extends State<TodosScreen> {
         child: Column(
           spacing: 18,
           children: [
-            const TodoTitle(todoDateTitle: 'Today', date: '07-08-2025'),
+            TodoTitle(todoDateTitle: 'Today', date: formatDate(date)),
             const ListUncompletedTasks(),
             const TodoTitle(todoDateTitle: 'Completed Today'),
             const ListCompletedTasks(),

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_list_sqlite/providers/date_provider.dart';
 
-class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({super.key});
-
-  @override
-  State<CalendarScreen> createState() => _CalendarScreenState();
-}
-
-class _CalendarScreenState extends State<CalendarScreen> {
+class CalendarScreen extends ConsumerWidget {
+  CalendarScreen({super.key});
   final _now = DateTime.now();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final firstDate = DateTime(2025, 5, 11);
     final lastDate = firstDate.add(const Duration(days: 365));
 
@@ -24,7 +20,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
           initialDate: initialDate,
           firstDate: firstDate,
           lastDate: lastDate,
-          onDateChanged: (date) {},
+          onDateChanged: (date) {
+            ref.read(dateProvider.notifier).changeNewDate(date.toString());
+          },
         ),
       ),
     );

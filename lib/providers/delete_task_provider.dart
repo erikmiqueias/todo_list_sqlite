@@ -5,7 +5,7 @@ import 'package:todo_list_sqlite/services/database_service.dart';
 class DeleteTaskNotifier extends StateNotifier<void> {
   DeleteTaskNotifier() : super(null);
 
-  Future<void> delteTask(int id) async {
+  Future<void> deleteTask(int id) async {
     final db = DatabaseService.instance;
     await db.deleteTask(id);
     db.closeDatabase();

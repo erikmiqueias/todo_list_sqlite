@@ -19,10 +19,7 @@ class _ListCompletedTasksState extends ConsumerState<ListCompletedTasks> {
     _getCompletedTasks();
   }
 
-  Future<void> _getCompletedTasks() async {
-    await ref.read(taskCompletedProvider.notifier).getCompletedTasks();
-    await ref.read(taskUncompletedProvider.notifier).getUncompletedTasks();
-  }
+  Future<void> _getCompletedTasks() async {}
 
   Widget _buildNoTasks() {
     return SizedBox(

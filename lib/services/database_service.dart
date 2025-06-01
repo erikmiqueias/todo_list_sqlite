@@ -1,5 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:todo_list_sqlite/helpers/date_format.dart';
 
 class DatabaseService {
   static Database? _db;
@@ -83,12 +84,13 @@ class DatabaseService {
     return result;
   }
 
-  Future getUncompletedTasks() async {
+  Future<List<Map<String, dynamic>>> getUncompletedTasks(String date) async {
     final db = await database;
     final result = await db.query(
       _tasksTableName,
-      where: '$_tasksIsCompletedColumnName = ?',
-      whereArgs: [0],
+      where:
+          '$_tasksIsCompletedColumnName = ? AND LOWER($_tasksDateColumnName) LIKE LOWER(?)',
+      whereArgs: [0, '%${formatDate(date)}%'],
     );
     return result;
   }
