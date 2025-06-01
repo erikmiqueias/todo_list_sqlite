@@ -23,7 +23,7 @@ class TodoTitle extends StatelessWidget {
           child: SvgPicture.asset('assets/switch_icon.svg'),
         ),
         Text(
-          'Todo List',
+          'Lista de Tarefas',
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(
             color: Theme.of(context).colorScheme.primary,
             fontFamily: 'Poppins',
