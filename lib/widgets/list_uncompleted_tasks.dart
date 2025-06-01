@@ -62,8 +62,10 @@ class ListUncompletedTasks extends ConsumerWidget {
                           Dismissible(
                             key: ValueKey(task['id']),
                             direction: DismissDirection.startToEnd,
-                            onDismissed: (_) {
-                              deleteTask(context, ref, task['id']);
+                            onDismissed: (_) async {
+                              await deleteTask(context, ref, task['id']);
+                              await _refreshTasks(ref);
+                              showSnackBar(context);
                             },
                             child: TodoWidget(
                               id: task['id'],
