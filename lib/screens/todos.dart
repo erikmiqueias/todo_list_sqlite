@@ -36,9 +36,9 @@ class _TodosScreenState extends ConsumerState<TodosScreen> {
         child: Column(
           spacing: 18,
           children: [
-            TodoTitle(todoDateTitle: 'Today', date: formatDate(date)),
+            TodoTitle(todoDateTitle: 'Hoje', date: formatDate(date)),
             const ListUncompletedTasks(),
-            const TodoTitle(todoDateTitle: 'Completed Today'),
+            const TodoTitle(todoDateTitle: 'Completas Hoje'),
             const ListCompletedTasks(),
           ],
         ),

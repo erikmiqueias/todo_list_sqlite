@@ -105,14 +105,14 @@ class _AddTaskModalScreenState extends ConsumerState<AddTaskModalScreen> {
             TextField(
               controller: _titleController,
               decoration: const InputDecoration(
-                hintText: 'Title Task',
+                hintText: 'Título da tarefa',
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
               ),
             ),
             TextField(
               controller: _descriptionController,
               decoration: const InputDecoration(
-                hintText: 'Description Task',
+                hintText: 'Descrição da tarefa',
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
               ),
             ),
@@ -139,7 +139,7 @@ class _AddTaskModalScreenState extends ConsumerState<AddTaskModalScreen> {
                     label: Text(
                       _selectedDate != null
                           ? '${_selectedDate?.day}/${_selectedDate?.month}/${_selectedDate?.year}'
-                          : 'No Date Selected',
+                          : 'Nenhuma data selecionada',
                     ),
                   ),
                 ),
@@ -152,9 +152,12 @@ class _AddTaskModalScreenState extends ConsumerState<AddTaskModalScreen> {
               children: [
                 ModalButton(
                   onPress: () => Navigator.pop(context),
-                  child: Text('Cancel'),
+                  child: Text('Cancelar'),
                 ),
-                ModalButton(onPress: () => _submitForm(), child: Text('Save')),
+                ModalButton(
+                  onPress: () => _submitForm(),
+                  child: Text('Salvar'),
+                ),
               ],
             ),
           ],

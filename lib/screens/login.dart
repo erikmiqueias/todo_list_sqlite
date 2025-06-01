@@ -16,6 +16,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -36,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Organize your life work and finally.',
+                  'Organize sua vida com facilidade.',
                   style: TextStyle(
                     color:
                         Theme.of(context).textTheme.bodyLarge!
@@ -53,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Continue with more options',
+                  'Continue com mais opções',
                   style: TextStyle(
                     color: Colors.grey.shade500,
                     decoration: TextDecoration.underline,
@@ -61,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'By continuing, you agree to our Terms of Service and Privacy Policy.',
+                  'Por continuar, você concorda com nossos Termos de Uso e Política de Privacidade.',
                   style: TextStyle(color: Colors.grey.shade500),
                   textAlign: TextAlign.center,
                 ),

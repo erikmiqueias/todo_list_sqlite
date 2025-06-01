@@ -20,7 +20,7 @@ class ListUncompletedTasks extends ConsumerWidget {
   void showSnackBar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Task deleted'),
+        content: Text('Tarefa excluida com sucesso!'),
         duration: Duration(seconds: 1),
       ),
     );
@@ -36,7 +36,7 @@ class ListUncompletedTasks extends ConsumerWidget {
           tasks.isEmpty
               ? Center(
                 child: Text(
-                  'No tasks to do!',
+                  'Nenhuma tarefa pendente',
                   style: TextStyle(color: Colors.grey, fontSize: 20),
                 ),
               )

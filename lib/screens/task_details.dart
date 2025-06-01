@@ -17,7 +17,7 @@ class TaskDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Task Details')),
+      appBar: AppBar(title: const Text('Detalhes da Tarefa')),
       body: Container(
         padding: const EdgeInsets.all(35),
         width: double.infinity,
@@ -69,7 +69,7 @@ class TaskDetailsScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
-                'Status: ${isCompleted == 1 ? 'Completed' : 'Not Completed'}',
+                'Status: ${isCompleted == 1 ? 'Concluída' : 'Não Concluida'}',
                 softWrap: true,
                 textAlign: TextAlign.center,
                 style: TextStyle(

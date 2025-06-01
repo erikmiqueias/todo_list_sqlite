@@ -32,7 +32,7 @@ class _ListCompletedTasksState extends ConsumerState<ListCompletedTasks> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'No tasks completed!',
+            'Nenhuma tarefa concluída',
             style: TextStyle(color: Colors.grey, fontSize: 20),
           ),
         ],
