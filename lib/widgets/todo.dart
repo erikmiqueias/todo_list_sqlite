@@ -150,7 +150,9 @@ class _TodoState extends State<TodoWidget> {
               ),
               InkWell(
                 child: Icon(
-                  widget.isFavorite == 1 ? Icons.star : Icons.star_border,
+                  widget.isFavorite == 1
+                      ? Icons.bookmark_add
+                      : Icons.bookmark_add_outlined,
                   size: 23,
                 ),
                 onTap: () {

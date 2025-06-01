@@ -90,7 +90,7 @@ class DatabaseService {
     final result = await db.query(
       _tasksTableName,
       where:
-          '$_tasksIsCompletedColumnName = ? AND LOWER($_tasksDateColumnName) LIKE LOWER(?)',
+          '$_tasksIsCompletedColumnName = ? AND LOWER($_tasksDateColumnName) LIKE LOWER(?) ORDER BY $_tasksIsFavoriteColumnName DESC',
       whereArgs: [0, '%${formatDate(date)}%'],
     );
     return result;

@@ -23,10 +23,11 @@ class _TodosScreenState extends ConsumerState<TodosScreen> {
     return Scaffold(
       appBar: AppBar(
         actionsPadding: const EdgeInsets.symmetric(horizontal: 20),
+        elevation: 0,
+        scrolledUnderElevation: 0,
         actions: [
           widget.title,
           const Spacer(),
-
           SvgPicture.asset('assets/avatar.svg', height: 35, width: 35),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_sqlite/helpers/date_format.dart';
 
 class TaskDetailsScreen extends StatelessWidget {
   const TaskDetailsScreen({
@@ -51,7 +52,11 @@ class TaskDetailsScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primaryContainer,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Text(date, softWrap: true, textAlign: TextAlign.center),
+              child: Text(
+                formatDate(date),
+                softWrap: true,
+                textAlign: TextAlign.center,
+              ),
             ),
 
             Container(
