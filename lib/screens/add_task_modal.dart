@@ -43,9 +43,9 @@ class _AddTaskModalScreenState extends ConsumerState<AddTaskModalScreen> {
         builder:
             (ctx) => AlertDialog(
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              title: const Text('Invalid input!'),
+              title: const Text('Alguns campos estão vazios'),
               content: const Text(
-                'Please provide valid title, description and date.',
+                'Por favor preencha todos os campos obrigatórios.',
               ),
               actions: [
                 TextButton(
